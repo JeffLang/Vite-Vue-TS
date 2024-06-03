@@ -1,26 +1,13 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div>
-    <MyParent></MyParent>
-  </div>
+  <h2>App</h2>
+  <RouterView v-slot="{ Component }">
+    <keep-alive>
+      <component v-if="$route.meta.keepAlive" :is="Component"></component>
+    </keep-alive>
+    <component v-if="!$route.meta.keepAlive" :is="Component"></component>
+  </RouterView>
 </template>
 
 <script setup lang="ts">
-import MyParent from './pages/MyParent/MyParent.vue'
+import { RouterView } from 'vue-router'
 </script>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
